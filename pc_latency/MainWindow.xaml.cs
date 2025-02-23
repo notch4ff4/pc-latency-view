@@ -6,6 +6,8 @@ using System.Windows;
 using System.Globalization;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
+using System.Windows.Media;
+using Microsoft.Win32;
 
 namespace pc_latency
 {
@@ -22,6 +24,51 @@ namespace pc_latency
             currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             UpdateCurrentFolderText();
             LoadCsvFiles();
+
+            SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
+            UpdateTheme();
+        }
+
+        private void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+        {
+            if (e.Category == UserPreferenceCategory.General)
+            {
+                UpdateTheme();
+            }
+        }
+
+        private void UpdateTheme()
+        {
+            using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"))
+            {
+                if (key != null)
+                {
+                    var value = key.GetValue("AppsUseLightTheme");
+                    if (value != null)
+                    {
+                        bool isLightTheme = (int)value == 1;
+
+                        if (isLightTheme)
+                        {
+                            Resources["WindowBackground"] = new SolidColorBrush(Colors.White);
+                            Resources["WindowText"] = new SolidColorBrush(Colors.Black);
+                            Resources["BorderBrush"] = new SolidColorBrush(Color.FromRgb(204, 204, 204));
+                        }
+                        else
+                        {
+                            Resources["WindowBackground"] = new SolidColorBrush(Color.FromRgb(32, 32, 32));
+                            Resources["WindowText"] = new SolidColorBrush(Colors.White);
+                            Resources["BorderBrush"] = new SolidColorBrush(Color.FromRgb(64, 64, 64));
+                        }
+                    }
+                }
+            }
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            SystemEvents.UserPreferenceChanged -= SystemEvents_UserPreferenceChanged;
+            base.OnClosing(e);
         }
 
         private void UpdateCurrentFolderText()

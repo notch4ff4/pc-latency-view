@@ -7,6 +7,19 @@
         mc:Ignorable="d"
         Title="Анализ PC Latency" Height="600" Width="500"
         ResizeMode="NoResize">
+    <Window.Resources>
+        <SolidColorBrush x:Key="WindowBackground" Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
+        <SolidColorBrush x:Key="WindowText" Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+    </Window.Resources>
+
+    <Window.Background>
+        <DynamicResource ResourceKey="WindowBackground"/>
+    </Window.Background>
+    <Window.Foreground>
+        <DynamicResource ResourceKey="WindowText"/>
+    </Window.Foreground>
+
     <StackPanel Margin="10">
         <Button x:Name="SelectFolderButton"
                 Content="Выбрать папку"
@@ -19,7 +32,7 @@
                   TextWrapping="Wrap"
                   Margin="0,0,0,10"/>
 
-        <Border BorderBrush="Gray" BorderThickness="1" Margin="0,0,0,10" Padding="10">
+        <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Margin="0,0,0,10" Padding="10">
             <StackPanel>
                 <TextBlock Text="Файлы CSV"
                          FontSize="16"
@@ -28,11 +41,13 @@
                          Margin="0,0,0,10"/>
                 <ListBox x:Name="FileList"
                         Height="200"
-                        SelectionChanged="FileList_SelectionChanged"/>
+                        SelectionChanged="FileList_SelectionChanged"
+                        Background="{DynamicResource WindowBackground}"
+                        Foreground="{DynamicResource WindowText}"/>
             </StackPanel>
         </Border>
 
-        <Border BorderBrush="Gray" BorderThickness="1" Padding="10">
+        <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1" Padding="10">
             <StackPanel>
                 <TextBlock Text="Результаты PC Latency"
                          FontSize="16"
@@ -53,6 +68,6 @@
                          HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
-        <TextBlock HorizontalAlignment="Center" Text="Made by @notch4ff4 &amp; @synoxvf"/>
+        <TextBlock HorizontalAlignment="Center" Text="Made by @notch4ff4 &amp; @synoxvf" Margin="0,10,0,0"/>
     </StackPanel>
 </Window>
