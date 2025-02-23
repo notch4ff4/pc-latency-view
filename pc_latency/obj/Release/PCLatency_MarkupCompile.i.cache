@@ -1,4 +1,4 @@
-﻿pc_latency
+﻿PCLatency
 
 
 winexe
@@ -16,5 +16,5 @@ P:\Development\Repository\pc_latency\pc_latency\App.xaml
 16-543935111
 MainWindow.xaml;
 
-False
+True
 

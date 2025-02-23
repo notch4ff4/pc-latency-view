@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:pc_latency"
         mc:Ignorable="d"
         Title="Анализ PC Latency" Height="600" Width="500"
+        Icon="/allplay.ico"
         ResizeMode="NoResize">
     <Window.Resources>
         <SolidColorBrush x:Key="WindowBackground" Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>

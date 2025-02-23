@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("fodyweavers.xml")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("allplay.ico")]
 
 
